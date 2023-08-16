@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\tfit">
+      <UniqueIdentifier>{012a5368-3dda-48f8-8e0d-eaf7af907acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\contexts">
+      <UniqueIdentifier>{e02b2709-1418-4f12-9600-b82824229df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\streams">
+      <UniqueIdentifier>{5fabc338-1aae-4cf2-9b7a-6f15d3bfe8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\contexts">
+      <UniqueIdentifier>{fa64c4ad-7d6a-4631-8200-42a716cdf78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\streams">
+      <UniqueIdentifier>{52206c30-4379-4f4a-94cb-f29aeeeaae45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tfit">
+      <UniqueIdentifier>{e0bc1eb4-ea41-41b6-968e-9914eb37c0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\contexts\keys">
+      <UniqueIdentifier>{5b89f663-f62c-4c69-a6fa-bbf98d788fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\contexts\tables">
+      <UniqueIdentifier>{5bcd9f1f-5822-4bf3-9779-66b9e92d8d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\contexts\keys">
+      <UniqueIdentifier>{831b43c0-ea86-40fc-99c7-f30bfbffb0eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\contexts\tables">
+      <UniqueIdentifier>{d28ae52a-ab03-44f6-a319-cc9bda206c0f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="iobinary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="obfuscation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fh3.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fh3dev.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fh4.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fh5.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fm6apex.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\keys\fm7.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\tables\fh3.cpp">
+      <Filter>Source Files\contexts\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\tables\fh4.cpp">
+      <Filter>Source Files\contexts\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\tables\fh5.cpp">
+      <Filter>Source Files\contexts\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\tables\fm6apex.cpp">
+      <Filter>Source Files\contexts\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\tables\fm7.cpp">
+      <Filter>Source Files\contexts\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="contexts\contexts.cpp">
+      <Filter>Source Files\contexts</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\decryption_stream.cpp">
+      <Filter>Source Files\streams</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\encryption_stream.cpp">
+      <Filter>Source Files\streams</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\fh3.cpp">
+      <Filter>Source Files\streams</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\fm6apex.cpp">
+      <Filter>Source Files\streams</Filter>
+    </ClCompile>
+    <ClCompile Include="tfit\decryption.cpp">
+      <Filter>Source Files\tfit</Filter>
+    </ClCompile>
+    <ClCompile Include="tfit\encryption.cpp">
+      <Filter>Source Files\tfit</Filter>
+    </ClCompile>
+    <ClCompile Include="tfit\mac.cpp">
+      <Filter>Source Files\tfit</Filter>
+    </ClCompile>
+    <ClCompile Include="tfit\tfit.cpp">
+      <Filter>Source Files\tfit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="iobinary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obfuscation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\contexts.h">
+      <Filter>Header Files\contexts</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fh3.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fh3dev.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fh4.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fh5.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fm6apex.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fm7.h">
+      <Filter>Header Files\contexts\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\tables\fh3.h">
+      <Filter>Header Files\contexts\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\tables\fh4.h">
+      <Filter>Header Files\contexts\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\tables\fh5.h">
+      <Filter>Header Files\contexts\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\tables\fm6apex.h">
+      <Filter>Header Files\contexts\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\tables\fm7.h">
+      <Filter>Header Files\contexts\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\decryption_stream.h">
+      <Filter>Header Files\streams</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\encryption_stream.h">
+      <Filter>Header Files\streams</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\fh3.h">
+      <Filter>Header Files\streams</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\fm6apex.h">
+      <Filter>Header Files\streams</Filter>
+    </ClInclude>
+    <ClInclude Include="tfit\decryption.h">
+      <Filter>Header Files\tfit</Filter>
+    </ClInclude>
+    <ClInclude Include="tfit\encryption.h">
+      <Filter>Header Files\tfit</Filter>
+    </ClInclude>
+    <ClInclude Include="tfit\mac.h">
+      <Filter>Header Files\tfit</Filter>
+    </ClInclude>
+    <ClInclude Include="tfit\tfit.h">
+      <Filter>Header Files\tfit</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
