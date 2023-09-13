@@ -1,9 +1,9 @@
 #include <ranges>
 #include "obfuscation.h"
 
-Obfuscation::Obfuscation(uint32_t seed, const std::array<uint8_t, 256> &crc32_mapping_table) :
-  seed_(seed),
-  crc32_mapping_table_(crc32_mapping_table) {
+Obfuscation::Obfuscation(uint32_t seed, const std::array<uint8_t, 256> &crc32_mapping_table)
+  : seed_(seed)
+  , crc32_mapping_table_(crc32_mapping_table) {
 
 }
 

@@ -31,6 +31,7 @@ enum class KeyType {
 };
 
 enum class GameType {
+  FH5_v1_614_70_0,
   FH5,
   FH4,
   FM7,

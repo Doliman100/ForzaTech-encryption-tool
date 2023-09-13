@@ -146,6 +146,7 @@
     <ClCompile Include="contexts\keys\fh3dev.cpp" />
     <ClCompile Include="contexts\keys\fh4.cpp" />
     <ClCompile Include="contexts\keys\fh5.cpp" />
+    <ClCompile Include="contexts\keys\fh5_v1.614.70.0.cpp" />
     <ClCompile Include="contexts\keys\fm6apex.cpp" />
     <ClCompile Include="contexts\keys\fm7.cpp" />
     <ClCompile Include="contexts\tables\fh3.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="contexts\keys\fh3dev.h" />
     <ClInclude Include="contexts\keys\fh4.h" />
     <ClInclude Include="contexts\keys\fh5.h" />
+    <ClInclude Include="contexts\keys\fh5_v1.614.70.0.h" />
     <ClInclude Include="contexts\keys\fm6apex.h" />
     <ClInclude Include="contexts\keys\fm7.h" />
     <ClInclude Include="contexts\tables\fh3.h" />

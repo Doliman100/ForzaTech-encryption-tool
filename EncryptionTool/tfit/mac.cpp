@@ -3,8 +3,8 @@
 #include <ranges>
 #include "tfit/mac.h"
 
-MAC::MAC(std::span<const std::array<std::array<uint8_t, 4>, 4>, 13> keys, std::array<std::array<std::array<std::array<uint8_t, 4>, 256>, 16>, 13> &tables) :
-  Encryption(iv_placeholder_, keys, tables) {
+MAC::MAC(std::span<const std::array<std::array<uint8_t, 4>, 4>, 13> keys, std::array<std::array<std::array<std::array<uint8_t, 4>, 256>, 16>, 13> &tables)
+  : Encryption(iv_placeholder_, keys, tables) {
 
 }
 

@@ -10,7 +10,6 @@
 #include "streams/fh3.h"
 #include "streams/fm6apex.h"
 #include "tfit/encryption.h"
-#include "streams/encryption_stream.h"
 #include "iobinary.h"
 #include "zip.h"
 #include "contexts/contexts.h"
@@ -39,7 +38,9 @@ struct IV {
   }
 
   IV(const std::string &str) {
-    auto result = boost::algorithm::unhex(str, std::begin(data));
+    std::string str_tmp(str);
+    str_tmp.erase(std::remove_if(str_tmp.begin(), str_tmp.end(), [](unsigned char c) { return std::isspace(c); }), str_tmp.end());
+    auto result = boost::algorithm::unhex(str_tmp, std::begin(data));
     if (result != std::end(data)) {
       throw std::runtime_error("IV length is less than 16 bytes.");
     }
@@ -66,13 +67,14 @@ void PrintHelp(po::options_description &options) {
   std::cout << std::endl;
   std::cout << "Example:" << std::endl;
   std::cout << "  .\\EncryptionTool.exe -i\"C:\\Program Files (x86)\\DODI-Repacks\\Forza Horizon 5\\media\\Physics\\PI.xml\" -o\"PI.xml\"" << std::endl;
+  std::cout << "  .\\EncryptionTool.exe -m0 -gFH5 -kProfile --iv=\"0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C\" -i\"User_69C2EF99.ProfileData\" -o\"C:\\Users\\Public\\Documents\\EMPRESS\\1551360\\remote\\1551360\\remote\\1774383001\\User_69C2EF99.ProfileData\"" << std::endl;
 }
 
 std::unique_ptr<DecryptionStream> CreateEncryptedFile(std::istream &input, uint32_t input_size) {
   // MAC validation
-  std::unique_ptr<DecryptionStream> encrypted_file = std::make_unique<ForzaHorizon3>(input, input_size);
+  std::unique_ptr<DecryptionStream> encrypted_file = std::make_unique<ForzaHorizon3::DecryptionStream>(input, input_size);
   if (!*encrypted_file) {
-    encrypted_file = std::make_unique<ForzaMotorsport6Apex>(input, input_size);
+    encrypted_file = std::make_unique<ForzaMotorsport6Apex::DecryptionStream>(input, input_size);
   }
   if (!*encrypted_file) {
     std::cerr << "Error: None of the keys matched." << std::endl;
@@ -112,7 +114,7 @@ int main(int argc, char *argv[]) {
   encryption_options.add_options()
     ("game,g", po::value<GameType>()->value_name("string")->required(), "Game title. (FM6Apex, FH3, FM7, FH4, FH5)")
     ("key,k", po::value<KeyType>()->value_name("string")->required(), "Key type. (SFS, GameDB, File, ConfigFile, Profile, Reward, Photo, Dynamic)")
-    ("iv", po::value<IV>()->default_value(IV(), "00000000000000000000000000000000")->value_name("string"), "Initialization vector. Hex string of length 32.");
+    ("iv", po::value<IV>()->default_value(IV(), "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00")->value_name("string"), "Initialization vector. Hex string of length 32.");
   all_options.add(encryption_options);
   po::variables_map vm;
   try {
@@ -172,6 +174,11 @@ int main(int argc, char *argv[]) {
   if (vm["mode"].as<uint32_t>() == 0) {
     const GameType &game_type = vm["game"].as<GameType>();
     const KeyType &key_type = vm["key"].as<KeyType>();
+    const IV &iv = vm["iv"].as<IV>();
+
+    uint32_t input_size = static_cast<uint32_t>(std::filesystem::file_size(input_path));
+    std::unique_ptr<EncryptionStream> es;
+
     auto context = std::find_if(std::begin(ForzaHorizon3::contexts), std::end(ForzaHorizon3::contexts), [&](auto &v) {
       return v.game_type == game_type && v.key_type == key_type;
     });
@@ -182,18 +189,18 @@ int main(int argc, char *argv[]) {
       if (context == std::end(ForzaMotorsport6Apex::contexts)) {
         std::cerr << "Error: The game has no this key type." << std::endl;
         return -1;
+      } else {
+        es = std::make_unique<ForzaMotorsport6Apex::EncryptionStream>(*output, input_size, iv.data, *context);
       }
+    } else {
+      es = std::make_unique<ForzaHorizon3::EncryptionStream>(*output, input_size, iv.data, *context);
     }
     if (context->encryption_keys.data() == null_encryption_keys.data()) {
       std::cerr << "Error: The game has no encryption key of this type." << std::endl;
       return -1;
     }
 
-    const IV &iv = vm["iv"].as<IV>();
-
-    uint32_t input_size = static_cast<uint32_t>(std::filesystem::file_size(input_path));
-    EncryptionStream es(*output, input_size, iv.data, *context);
-    es.WriteData(input);
+    es->WriteData(input);
   } else {
     try {
       Zip::Transfer zip_reader(input, *output);

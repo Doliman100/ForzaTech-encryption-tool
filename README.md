@@ -67,17 +67,18 @@ Decrypted file size: 0x4F79869
 > .\EncryptionTool.exe -h
 
 Options:
-  -h [ --help ]                                    Print this help message.
-  -v [ --verbose ] number (=1)                     Set verbosity level. (0 - no output, 1 - default, 2 - verbose)
-  -m [ --mode ] number (=1)                        (0 - encryption, 1 - decryption)
-  -i [ --input ] string                            Set the input file path.
-  -o [ --output ] string                           Set the output file path. ('-' - stdout)
-  -y [ --yes ]                                     Overwrite output file, if exists.
+  -h [ --help ]                         Print this help message.
+  -v [ --verbose ] number (=1)          Set verbosity level. (0 - no output, 1 - default, 2 - verbose)
+  -m [ --mode ] number (=1)             (0 - encryption, 1 - decryption)
+  -i [ --input ] string                 Set the input file path.
+  -o [ --output ] string                Set the output file path. ('-' - stdout)
+  -y [ --yes ]                          Overwrite output file, if exists.
 
 Encryption options:
-  -g [ --game ] string                             Game title. (FM6Apex, FH3, FM7, FH4, FH5)
-  -k [ --key ] string                              Key type. (SFS, GameDB, File, ConfigFile, Profile, Reward, Photo, Dynamic)
-  --iv string (=00000000000000000000000000000000)  Initialization vector. Hex string of length 32.
+  -g [ --game ] string                  Game title. (FM6Apex, FH3, FM7, FH4, FH5)
+  -k [ --key ] string                   Key type. (SFS, GameDB, File, ConfigFile, Profile, Reward, Photo, Dynamic)
+  --iv string (=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00)
+                                        Initialization vector. Hex string of length 32.
 ```
 
 ### Decryption
@@ -93,7 +94,7 @@ Encryption options:
 
 ### Encryption
 ```
-.\EncryptionTool.exe -m0 -gFH5 -kProfile -i"User_69C2EF99.ProfileData" -o"encrypted/User_69C2EF99.ProfileData"
+.\EncryptionTool.exe -m0 -gFH5 -kProfile --iv="0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C" -i"User_69C2EF99.ProfileData" -o"C:\Users\Public\Documents\EMPRESS\1551360\remote\1551360\remote\1774383001\User_69C2EF99.ProfileData"
 ```
 
 ## Requirements

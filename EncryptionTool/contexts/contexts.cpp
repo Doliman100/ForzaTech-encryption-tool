@@ -44,6 +44,10 @@ std::map<KeyType, Name> key_types = {
 
 std::map<GameType, Name> game_types = {
   {
+    GameType::FH5_v1_614_70_0,
+    {"Forza Horizon 5 v1.614.70.0", "FH5_v1.614.70.0"}
+  },
+  {
     GameType::FH5,
     {"Forza Horizon 5", "FH5"}
   },

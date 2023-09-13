@@ -1,10 +1,14 @@
 #include <istream>
 #include "iobinary.h"
+#include "contexts/tables/fm7.h"
+#include "contexts/tables/fm6apex.h"
+#include "contexts/keys/fm7.h"
+#include "contexts/keys/fm6apex.h"
 #include "tfit/mac.h"
 #include "streams/fm6apex.h"
 
-ForzaMotorsport6Apex::ForzaMotorsport6Apex(std::istream &input, uint32_t input_size) :
-  DecryptionStream(input) {
+ForzaMotorsport6Apex::DecryptionStream::DecryptionStream(std::istream &input, uint32_t input_size)
+  : ::DecryptionStream(input) {
   if (input_size < 32) {
     return;
   }
@@ -42,6 +46,20 @@ ForzaMotorsport6Apex::ForzaMotorsport6Apex(std::istream &input, uint32_t input_s
   if (!is_open_) {
     input.seekg(-36, std::ios_base::cur);
   }
+}
+
+ForzaMotorsport6Apex::EncryptionStream::EncryptionStream(std::ostream &os, uint32_t size, const std::array<uint8_t, 16> &iv, Context &context)
+  : ::EncryptionStream(os, size, iv, context) {
+  data_size_ = (size_ + context.data_block_size - 1) / context.data_block_size * context.data_block_size; // round up size_ to data_block_size
+
+  std::vector<uint8_t> header;
+  Write32LE(data_size_, std::back_inserter(header));
+  header.insert(std::end(header), std::begin(iv_), std::end(iv_));
+  os.write(reinterpret_cast<char *>(header.data()) + 4, 16);
+
+  std::array<uint8_t, 16> header_mac{};
+  mac_.Calculate(header, header_mac);
+  os.write(reinterpret_cast<char *>(header_mac.data()), 16);
 }
 
 std::vector<Context> ForzaMotorsport6Apex::contexts = {
@@ -100,6 +118,17 @@ std::vector<Context> ForzaMotorsport6Apex::contexts = {
     fm7_decryption_tables,
     fm7_mac_tables,
     std::make_shared<Obfuscation>(fm7_db_obfuscation_seed, fm6apex_crc32_mapping)
+  },
+  {
+    GameType::FM7,
+    KeyType::SFS,
+    0x20000,
+    std::span(null_encryption_keys),
+    std::span(fm7_sfs_decryption_keys).subspan<1, 17>(),
+    std::span(fm7_sfs_mac_keys).subspan<1, 13>(),
+    fm7_encryption_tables,
+    fm7_decryption_tables,
+    fm7_mac_tables
   },
   {
     GameType::FM6Apex,

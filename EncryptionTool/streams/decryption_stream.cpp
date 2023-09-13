@@ -7,9 +7,9 @@
 #include "iobinary.h"
 #include "streams/decryption_stream.h"
 
-DecryptionStream::DecryptionStream(std::istream &input) :
-  input_(input),
-  iv_() {
+DecryptionStream::DecryptionStream(std::istream &input)
+  : input_(input)
+  , iv_() {
 
 }
 

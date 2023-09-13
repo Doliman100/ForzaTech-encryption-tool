@@ -1,10 +1,18 @@
 #include <istream>
 #include "iobinary.h"
+#include "contexts/tables/fh5.h"
+#include "contexts/tables/fh4.h"
+#include "contexts/tables/fh3.h"
+#include "contexts/tables/fm6apex.h"
+#include "contexts/keys/fh5_v1.614.70.0.h"
+#include "contexts/keys/fh5.h"
+#include "contexts/keys/fh4.h"
+#include "contexts/keys/fh3.h"
 #include "tfit/mac.h"
 #include "streams/fh3.h"
 
-ForzaHorizon3::ForzaHorizon3(std::istream &input, uint32_t input_size) :
-  DecryptionStream(input) {
+ForzaHorizon3::DecryptionStream::DecryptionStream(std::istream &input, uint32_t input_size)
+  : ::DecryptionStream(input) {
   if (input_size < 36) {
     return;
   }
@@ -46,7 +54,57 @@ ForzaHorizon3::ForzaHorizon3(std::istream &input, uint32_t input_size) :
   }
 }
 
+ForzaHorizon3::EncryptionStream::EncryptionStream(std::ostream &os, uint32_t size, const std::array<uint8_t, 16> &iv, Context &context)
+  : ::EncryptionStream(os, size, iv, context) {
+  padding_size_ = context.data_block_size - size_ % context.data_block_size;
+  data_size_ = size_ + padding_size_;
+
+  std::vector<uint8_t> header;
+  Write32LE(data_size_, std::back_inserter(header));
+  header.insert(std::end(header), std::begin(iv_), std::end(iv_));
+  Write32LE(padding_size_, std::back_inserter(header));
+  os.write(reinterpret_cast<char *>(header.data()) + 4, 20);
+
+  std::array<uint8_t, 16> header_mac{};
+  mac_.Calculate(header, header_mac);
+  os.write(reinterpret_cast<char *>(header_mac.data()), 16);
+}
+
 std::vector<Context> ForzaHorizon3::contexts = {
+  {
+    GameType::FH5_v1_614_70_0,
+    KeyType::File,
+    0x200,
+    std::span(null_encryption_keys),
+    std::span(fh5_v1_614_70_0_file_decryption_keys).subspan<1, 17>(),
+    std::span(fh5_v1_614_70_0_file_mac_keys).subspan<1, 13>(),
+    fh4_encryption_tables,
+    fh4_decryption_tables,
+    fh4_mac_tables
+  },
+  {
+    GameType::FH5_v1_614_70_0,
+    KeyType::GameDB,
+    0x20000,
+    std::span(null_encryption_keys),
+    std::span(fh5_v1_614_70_0_gamedb_decryption_keys).subspan<1, 17>(),
+    std::span(fh5_v1_614_70_0_gamedb_mac_keys).subspan<1, 13>(),
+    fh4_encryption_tables,
+    fh4_decryption_tables,
+    fh4_mac_tables,
+    std::make_shared<Obfuscation>(fh5_v1_614_70_0_gamedb_obfuscation_seed, fh5_crc32_mapping)
+  },
+  {
+    GameType::FH5_v1_614_70_0,
+    KeyType::SFS,
+    0x20000,
+    std::span(null_encryption_keys),
+    std::span(fh5_v1_614_70_0_sfs_decryption_keys).subspan<1, 17>(),
+    std::span(fh5_v1_614_70_0_sfs_mac_keys).subspan<1, 13>(),
+    fh4_encryption_tables,
+    fh4_decryption_tables,
+    fh4_mac_tables
+  },
   {
     GameType::FH5,
     KeyType::File,

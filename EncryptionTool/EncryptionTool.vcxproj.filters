@@ -117,6 +117,9 @@
     <ClCompile Include="tfit\tfit.cpp">
       <Filter>Source Files\tfit</Filter>
     </ClCompile>
+    <ClCompile Include="contexts\keys\fh5_v1.614.70.0.cpp">
+      <Filter>Source Files\contexts\keys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="iobinary.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="tfit\tfit.h">
       <Filter>Header Files\tfit</Filter>
+    </ClInclude>
+    <ClInclude Include="contexts\keys\fh5_v1.614.70.0.h">
+      <Filter>Header Files\contexts\keys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

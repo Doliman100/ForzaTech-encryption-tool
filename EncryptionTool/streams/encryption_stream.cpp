@@ -11,18 +11,7 @@ EncryptionStream::EncryptionStream(std::ostream &os, uint32_t size, const std::a
   , context_(context)
   , size_(size)
   , mac_(context.mac_keys, context.mac_tables) {
-  padding_size_ = context.data_block_size - size_ % context.data_block_size;
-  data_size_ = size_ + padding_size_;
 
-  std::vector<uint8_t> header;
-  Write32LE(data_size_, std::back_inserter(header));
-  header.insert(std::end(header), std::begin(iv_), std::end(iv_));
-  Write32LE(padding_size_, std::back_inserter(header));
-  os.write(reinterpret_cast<char *>(header.data()) + 4, 20);
-
-  std::array<uint8_t, 16> header_mac{};
-  mac_.Calculate(header, header_mac);
-  os.write(reinterpret_cast<char *>(header_mac.data()), 16);
 }
 
 void EncryptionStream::WriteData(std::istream &is) {

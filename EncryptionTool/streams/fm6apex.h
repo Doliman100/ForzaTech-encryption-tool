@@ -2,15 +2,19 @@
 
 #include <map>
 #include "contexts/contexts.h"
-#include "contexts/tables/fm7.h"
-#include "contexts/tables/fm6apex.h"
-#include "contexts/keys/fm7.h"
-#include "contexts/keys/fm6apex.h"
 #include "streams/decryption_stream.h"
+#include "streams/encryption_stream.h"
 
-class ForzaMotorsport6Apex : public DecryptionStream {
-public:
-  ForzaMotorsport6Apex(std::istream &input, uint32_t input_size);
+namespace ForzaMotorsport6Apex {
+  class DecryptionStream : public ::DecryptionStream {
+  public:
+    DecryptionStream(std::istream &input, uint32_t input_size);
+  };
 
-  static std::vector<Context> contexts;
-};
+  class EncryptionStream : public ::EncryptionStream {
+  public:
+    EncryptionStream(std::ostream &os, uint32_t size, const std::array<uint8_t, 16> &iv, Context &context);
+  };
+
+  extern std::vector<Context> contexts;
+}
