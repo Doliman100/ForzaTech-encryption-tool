@@ -179,6 +179,10 @@ void Zip::Transfer::Run(std::function<bool(LocalFileHeader &)> callback) {
 			throw Zip::Exception();
 			break;
 		}
-		is_.peek();
+
+		// skip zeros
+		while (is_.peek() == '\0') {
+			is_.get();
+		}
 	}
 }
