@@ -1,12 +1,19 @@
 # ForzaTech-crypto-tool
 You can use this tool to decrypt any file from any game that uses ForzaTech engine, from Forza Motorsport 6: Apex to Forza Horizon 5. It automatically guesses the right game title and key type using MAC verification. It can also be used to re-encrypt user content (game saves, photos, event lab routes).  
-This repository is lack of files containing decryption keys. These files and binaries can be found on [the XeNTaX thread](https://forum.xentax.com/viewtopic.php?t=19015).
+This repository is lack of files containing decryption keys. These files and binaries can be found on [the XeNTaX thread](https://web.archive.org/web/20231012075845/https://forum.xentax.com/viewtopic.php?t=19015&start=15#p193855).
 
 ## Features
 * Arxan TransformIT (GuardIT) encryption, decryption
 * Message authentication code (MAC) calculation
 * gamedb.slt deobfuscation
 * .zip method 22 support
+
+### Supported games
+* Forza Motorsport 6: Apex
+* Forza Horizon 3
+* Forza Motorsport 7
+* Forza Horizon 4
+* Forza Horizon 5 (v1.614.70.0 and earlier)
 
 ## Keys
 * SFS **(decryption)**
@@ -30,6 +37,7 @@ This repository is lack of files containing decryption keys. These files and bin
   * CustomRoute_0000_20211112181230.header
   * CustomRoute_0000_20211112181230.RouteData
 * Telemetry **(encryption)**
+* CMS **(encryption, decryption)**
 
 ## TFIT file structure
 * u8[16] IV
@@ -101,6 +109,7 @@ Encryption options:
 1. [boost 1.82.0](https://boostorg.jfrog.io/artifactory/main/release/1.82.0/binaries/)
 
 ## Links
-1. [TransformIT decryptor 1](https://github.com/Neodymium146/gta-toolkit/blob/master/RageLib.GTA5/Cryptography/GTA5Encryption.cs)
+1. [TransformIT decryptor 1](https://github.com/Neodymium146/gta-toolkit/blob/4be2c09bb6493d0aba106a43739dd1d1299e1962/RageLib.GTA5/Cryptography/GTA5Encryption.cs)
 1. [TransformIT decryptor 2](https://github.com/0x1F9F1/Swage/blob/master/src/crypto/tfit.cpp)
 1. [TransformIT file pattern](https://github.com/Nenkai/010GameTemplates/blob/main/Forza/TFIT.bt)
+1. [TransformIT 8.0 (GA) EvalKit headers](https://github.com/EOSIO/mojey/blob/main/MojeyCommon/Arxan/TFIT/TFIT.h)

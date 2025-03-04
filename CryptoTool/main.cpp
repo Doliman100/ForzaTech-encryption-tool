@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
   all_options.add(options);
   po::options_description encryption_options("Encryption options");
   encryption_options.add_options()
-    ("game,g", po::value<GameType>()->value_name("string")->required(), "Game title. (FM6Apex, FH3, FM7, FH4, FH5)")
+    ("game,g", po::value<GameType>()->value_name("string")->required(), "Game title. (FM6Apex, FH3, FM7, FH4, FH5, FH5_v1.614.70.0)")
     ("key,k", po::value<KeyType>()->value_name("string")->required(), "Key type. (SFS, GameDB, File, ConfigFile, Profile, Reward, Photo, Dynamic)")
     ("iv", po::value<IV>()->default_value(IV(), "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00")->value_name("string"), "Initialization vector. Hex string of length 32.");
   all_options.add(encryption_options);
