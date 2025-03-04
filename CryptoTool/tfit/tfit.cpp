@@ -45,17 +45,34 @@ void TFIT<Rounds>::RoundA(std::array<uint8_t, 16> &data, const std::array<std::a
   memcpy(data.data(), temp.data(), 16);
 }
 
+// TFIT_op_iCMAC, TFIT_wbaes_cbc_encrypt_iAES3, TFIT_wbaes_cbc_decrypt_iAES4
+// mac: AES-128, enc/dec: AES-256
+//   TFIT_rInv[16]
+//     TFIT_rInv_0_3_0_iAES3
+//     TFIT_rInv_3_3_0_iAES3
+//   TFIT_r[16]
+//     TFIT_r_0_3_0_iAES3
+//     TFIT_r_3_3_0_iAES3
+//   TFIT_rij[20 unique + (mac: 124, enc/dec: 188)] // Rijndael? 9/13 rounds?
+//     TFIT_rij_0_15_iAES3
+//     TFIT_rij_1_03_iAES3
+//   TFIT_sInv[16] // 10th/14th round?
+//     TFIT_sInv_0_3_0_iAES3
+//     TFIT_sInv_3_3_0_iAES3
+//   TFIT_s[16]
+//     TFIT_s_0_3_0_iAES3
+//     TFIT_s_3_3_0_iAES3
 template<size_t Rounds>
 void TFIT<Rounds>::ProcessBlock(std::span<uint8_t, 16> src, std::array<uint8_t, 16> &dst) {
   std::array<uint8_t, 16> temp;
   std::copy(std::begin(src), std::end(src), std::begin(temp));
 
-  RoundA(temp, keys_[0], tables_[0]);
-  RoundA(temp, keys_[1], tables_[1]);
+  RoundA(temp, keys_[0], tables_[0]); // rInv
+  RoundA(temp, keys_[1], tables_[1]); // r
   for (size_t i = 2; i < Rounds - 1; i++) {
-    RoundB(temp, keys_[i], tables_[i]);
+    RoundB(temp, keys_[i], tables_[i]); // rij, sInv
   }
-  RoundA(temp, keys_[Rounds - 1], tables_[Rounds - 1]);
+  RoundA(temp, keys_[Rounds - 1], tables_[Rounds - 1]); // s
 
   dst = temp;
 }

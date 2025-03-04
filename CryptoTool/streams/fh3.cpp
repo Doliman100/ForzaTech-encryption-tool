@@ -56,18 +56,18 @@ ForzaHorizon3::DecryptionStream::DecryptionStream(std::istream &input, uint32_t 
 
 ForzaHorizon3::EncryptionStream::EncryptionStream(std::ostream &os, uint32_t size, const std::array<uint8_t, 16> &iv, Context &context)
   : ::EncryptionStream(os, size, iv, context) {
-  padding_size_ = context.data_block_size - size_ % context.data_block_size;
+  padding_size_ = (-static_cast<int32_t>(size_)) & (context.data_block_size - 1);
   data_size_ = size_ + padding_size_;
 
   std::vector<uint8_t> header;
   Write32LE(data_size_, std::back_inserter(header));
-  header.insert(std::end(header), std::begin(iv_), std::end(iv_));
-  Write32LE(padding_size_, std::back_inserter(header));
+  header.insert(std::end(header), std::begin(iv_), std::end(iv_)); // mStream->Write(m_OriginalInitializationVector.get(), m_CryptoBlockSizeBytes) == (s32)m_CryptoBlockSizeBytes
+  Write32LE(padding_size_, std::back_inserter(header)); // mStream->Write(m_UnusedBytes.get(), m_UnusedSizeBytes) == (s32)m_UnusedSizeBytes
   os.write(reinterpret_cast<char *>(header.data()) + 4, 20);
 
   std::array<uint8_t, 16> header_mac{};
   mac_.Calculate(header, header_mac);
-  os.write(reinterpret_cast<char *>(header_mac.data()), 16);
+  os.write(reinterpret_cast<char *>(header_mac.data()), 16); // mStream->Write(m_MAC.get(), m_MACSizeBytes) == (s32)m_MACSizeBytes
 }
 
 std::vector<Context> ForzaHorizon3::contexts = {
