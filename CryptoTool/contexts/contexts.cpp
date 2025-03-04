@@ -69,6 +69,8 @@ std::map<GameType, Name> game_types = {
   }
 };
 
+std::array<std::array<std::array<uint8_t, 4>, 4>, 17> null_encryption_keys = {};
+
 void validate(boost::any &v, const std::vector<std::string> &values, GameType *target_type, int) {
   po::validators::check_first_occurrence(v);
 

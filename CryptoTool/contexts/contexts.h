@@ -66,7 +66,7 @@ struct Name {
 extern std::map<KeyType, Name> key_types;
 extern std::map<GameType, Name> game_types;
 
-constexpr std::array<std::array<std::array<uint8_t, 4>, 4>, 17> null_encryption_keys = {};
+extern std::array<std::array<std::array<uint8_t, 4>, 4>, 17> null_encryption_keys;
 
 void validate(boost::any &v, const std::vector<std::string> &values, GameType *target_type, int);
 void validate(boost::any &v, const std::vector<std::string> &values, KeyType *target_type, int);
