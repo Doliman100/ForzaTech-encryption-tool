@@ -1,4 +1,4 @@
-# ForzaTech-encryption-tool
+# ForzaTech-crypto-tool
 You can use this tool to decrypt any file from any game that uses ForzaTech engine, from Forza Motorsport 6: Apex to Forza Horizon 5. It automatically guesses the right game title and key type using MAC verification. It can also be used to re-encrypt user content (game saves, photos, event lab routes).  
 This repository is lack of files containing decryption keys. These files and binaries can be found on [the XeNTaX thread](https://forum.xentax.com/viewtopic.php?t=19015).
 
@@ -64,7 +64,7 @@ Decrypted file size: 0x4F79869
 
 ## Usage
 ```
-> .\EncryptionTool.exe -h
+> .\CryptoTool.exe -h
 
 Options:
   -h [ --help ]                         Print this help message.
@@ -83,18 +83,18 @@ Encryption options:
 
 ### Decryption
 ```
-.\EncryptionTool.exe -i"C:\Program Files (x86)\DODI-Repacks\Forza Horizon 5\media\Stripped\gamedbRC.slt" -o"gamedbRC.slt"
+.\CryptoTool.exe -i"C:\Program Files (x86)\DODI-Repacks\Forza Horizon 5\media\Stripped\gamedbRC.slt" -o"gamedbRC.slt"
 ```
 ```
-.\EncryptionTool.exe -i"C:\Program Files (x86)\DODI-Repacks\Forza Horizon 5\media\ProfileSchema.zip" -o"ProfileSchema.zip"
+.\CryptoTool.exe -i"C:\Program Files (x86)\DODI-Repacks\Forza Horizon 5\media\ProfileSchema.zip" -o"ProfileSchema.zip"
 ```
 ```
-.\EncryptionTool.exe -i"C:\Users\Public\Documents\EMPRESS\1551360\remote\1551360\remote\1774383001\User_69C2EF99.ProfileData" -o"User_69C2EF99.ProfileData"
+.\CryptoTool.exe -i"C:\Users\Public\Documents\EMPRESS\1551360\remote\1551360\remote\1774383001\User_69C2EF99.ProfileData" -o"User_69C2EF99.ProfileData"
 ```
 
 ### Encryption
 ```
-.\EncryptionTool.exe -m0 -gFH5 -kProfile --iv="0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C" -i"User_69C2EF99.ProfileData" -o"C:\Users\Public\Documents\EMPRESS\1551360\remote\1551360\remote\1774383001\User_69C2EF99.ProfileData"
+.\CryptoTool.exe -m0 -gFH5 -kProfile --iv="0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C" -i"User_69C2EF99.ProfileData" -o"C:\Users\Public\Documents\EMPRESS\1551360\remote\1551360\remote\1774383001\User_69C2EF99.ProfileData"
 ```
 
 ## Requirements

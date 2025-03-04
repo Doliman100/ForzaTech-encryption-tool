@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{b3be34bf-0530-44d2-af36-3c44ff5a2fe2}</ProjectGuid>
-    <RootNamespace>EncryptionTool</RootNamespace>
+    <RootNamespace>CryptoTool</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

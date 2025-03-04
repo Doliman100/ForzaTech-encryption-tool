@@ -66,8 +66,8 @@ void PrintHelp(po::options_description &options) {
   std::cout << options;
   std::cout << std::endl;
   std::cout << "Example:" << std::endl;
-  std::cout << "  .\\EncryptionTool.exe -i\"C:\\Program Files (x86)\\DODI-Repacks\\Forza Horizon 5\\media\\Physics\\PI.xml\" -o\"PI.xml\"" << std::endl;
-  std::cout << "  .\\EncryptionTool.exe -m0 -gFH5 -kProfile --iv=\"0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C\" -i\"User_69C2EF99.ProfileData\" -o\"C:\\Users\\Public\\Documents\\EMPRESS\\1551360\\remote\\1551360\\remote\\1774383001\\User_69C2EF99.ProfileData\"" << std::endl;
+  std::cout << "  .\\CryptoTool.exe -i\"C:\\Program Files (x86)\\DODI-Repacks\\Forza Horizon 5\\media\\Physics\\PI.xml\" -o\"PI.xml\"" << std::endl;
+  std::cout << "  .\\CryptoTool.exe -m0 -gFH5 -kProfile --iv=\"0C CF 15 0C A7 23 A0 23 7A A2 45 63 38 E0 4A 0C\" -i\"User_69C2EF99.ProfileData\" -o\"C:\\Users\\Public\\Documents\\EMPRESS\\1551360\\remote\\1551360\\remote\\1774383001\\User_69C2EF99.ProfileData\"" << std::endl;
 }
 
 std::unique_ptr<DecryptionStream> CreateEncryptedFile(std::istream &input, uint32_t input_size) {
